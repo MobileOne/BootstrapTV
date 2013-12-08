@@ -1,88 +1,95 @@
-var directory = {
 
-    views: {},
 
-    models: {},
+function loadData(){
+	var tvProg = new TVProg();
+}
 
-    loadTemplates: function(views, callback) {
+var TVProg = Class({
+    dataLoader  : null,
+    channels    : null,
+    programs    : null,
 
-        var deferreds = [];
+    initialize : function(){
+        this.dataLoader = new DataLoader( "data/tnt_lite.xml");
+        document.addEventListener("PROGRAMS_LOADED", this.initData.bind(this), false);
+    },
 
-        $.each(views, function(index, view) {
-            if (directory[view]) {
-                deferreds.push($.get('tpl/' + view + '.html', function(data) {
-                    directory[view].prototype.template = _.template(data);
-                }, 'html'));
-            } else {
-                alert(view + " not found");
-            }
-        });
-
-        $.when.apply(null, deferreds).done(callback);
+    initData : function( event){
+        this.channels = event.channels;
+        this.programs = event.programs;
     }
+});
 
-};
+var DataLoader = Class({
+    xmlFile  : null,
+    channels : new Array(),
+    programs : new Array(),
 
-directory.Router = Backbone.Router.extend({
-
-    routes: {
-        "":                 "home",
-        "contact":          "contact",
-        "employees/:id":    "employeeDetails"
+    getChannels : function(){
+        return this.channels;
     },
 
-    initialize: function () {
-        directory.shellView = new directory.ShellView();
-        $('body').html(directory.shellView.render().el);
-        // Close the search dropdown on click anywhere in the UI
-        $('body').click(function () {
-            $('.dropdown').removeClass("open");
-        });
-        this.$content = $("#content");
+    getPrograms : function(){
+        return this.programs;
     },
 
-    home: function () {
-        // Since the home view never changes, we instantiate it and render it only once
-        if (!directory.homelView) {
-            directory.homelView = new directory.HomeView();
-            directory.homelView.render();
-        } else {
-            console.log('reusing home view');
-            directory.homelView.delegateEvents(); // delegate events when the view is recycled
-        }
-        this.$content.html(directory.homelView.el);
-        directory.shellView.selectMenuItem('home-menu');
-    },
-
-    contact: function () {
-        if (!directory.contactView) {
-            directory.contactView = new directory.ContactView();
-            directory.contactView.render();
-        }
-        this.$content.html(directory.contactView.el);
-        directory.shellView.selectMenuItem('contact-menu');
-    },
-
-    employeeDetails: function (id) {
-        var employee = new directory.Employee({id: id});
+    initialize : function( fileName){
         var self = this;
-        employee.fetch({
-            success: function (data) {
-                console.log(data);
-                // Note that we could also 'recycle' the same instance of EmployeeFullView
-                // instead of creating new instances
-                self.$content.html(new directory.EmployeeView({model: data}).render().el);
+        $.ajax({
+            type: "GET",
+            url: fileName,
+            dataType: "xml",
+            success: function (xml) {
+                self.xmlFile = xml;
+                self.buildChannelList();
+                self.buildProgList();
+                
+                var PROGRAMS_LOADED = document.createEvent("Event");
+                PROGRAMS_LOADED.initEvent("PROGRAMS_LOADED", true, true);
+                PROGRAMS_LOADED.channels = self.channels;
+                PROGRAMS_LOADED.programs = self.programs;
+                document.dispatchEvent(PROGRAMS_LOADED);
+            },
+            error : function(){
+                alert("Erreur de chargement du XML")
             }
         });
-        directory.shellView.selectMenuItem();
-    }
+    },
 
-});
-
-$(document).on("ready", function () {
-    directory.loadTemplates(["HomeView", "ContactView", "ShellView", "EmployeeView", "EmployeeSummaryView", "EmployeeListItemView"],
-        function () {
-            directory.router = new directory.Router();
-            Backbone.history.start();
+    buildChannelList : function(){
+        var self = this;
+        if( !this.xmlFile) return;
+        var channels = $(this.xmlFile).find("channel");
+        channels.each(function( i ) {
+            var id          = $(channels[i]).attr("id");
+            var displayName = $(channels[i]).find("display-name").text();
+            var icon        = $(channels[i]).find("icon").attr("src").substring(17);
+            var channel     = new Channel( id, displayName, icon);
+            self.channels.push(channel);
+            self.programs[id] = new Array();
         });
+    },
+
+    buildProgList : function(){
+        var self = this;
+        if( !this.xmlFile) return;
+        var progs = $(this.xmlFile).find("programme");
+        progs.each(function( i ) {
+            var start     = $(progs[i]).attr("start");
+            var stop      = $(progs[i]).attr("stop");
+            var channel   = $(progs[i]).attr("channel");
+            var title     = $(progs[i]).find("title").text();
+            var sub_title = $(progs[i]).find("sub_title").text();
+            var desc      = $(progs[i]).find("desc").text();
+            var category  = $(progs[i]).find("category").first().text();
+            var video     = $(progs[i]).find("video").find("aspect").text();
+            var rating    = $(progs[i]).find("rating").find("value").text();
+            var icon      = $(progs[i]).find("icon").attr("src");
+            var prog = new Program( start, stop, channel, title, sub_title, desc, category, video, rating, icon);
+            self.programs[channel].push(prog);
+        });
+    }
 });
+
+
+
