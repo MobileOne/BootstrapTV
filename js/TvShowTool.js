@@ -58,5 +58,17 @@ var TvShowTool = {
         var value = heure * 2;
         if (min > 30) value++;
         return value;
+    },
+
+    getTextFromXmlDate : function( xmlDate){
+        var heure = TvShowTool.getDateByTvShowDate( xmlDate).getHours()   <= 9 ? "0"+TvShowTool.getDateByTvShowDate( xmlDate).getHours()   : TvShowTool.getDateByTvShowDate( xmlDate).getHours();
+        var min   = TvShowTool.getDateByTvShowDate( xmlDate).getMinutes() <= 9 ? "0"+TvShowTool.getDateByTvShowDate( xmlDate).getMinutes() : TvShowTool.getDateByTvShowDate( xmlDate).getMinutes();
+        return heure + ":" + min;
     }
+
+
+
+
+
+    
 };

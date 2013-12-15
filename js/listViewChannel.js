@@ -69,7 +69,6 @@ var listViewChannel = Class({
     },
 
     calculeProgresseBar : function( prog){
-
         var xmlDateStart = prog.start,
             start = TvShowTool.getDateByTvShowDate(xmlDateStart).getTime(),
             xmlDateStop = prog.stop,
@@ -78,21 +77,25 @@ var listViewChannel = Class({
             now = TvShowTool.getDateByTvShowDate(xmlDateNow).getTime(),
             duree = stop - start,
             passe = now  - start;
-
         return  Math.floor((passe / duree) * 100) + "%";
     },
 
     buildOneProg : function( prog){
         var img = prog.icon ? '<div class="hidden-xs col-sm-2"> <img style="width:50px;" src="' + prog.icon + '"/> </div>' : '';
-        var html = '<div class="col-xs-12 col-sm-10" >'
+        var html = '<div class="col-xs-12 col-sm-10" onclick="showManager.displayShowInfo('+prog.channel + ', '+prog.id+')">'
                  + '    <div> <strong>' + prog.title + '</strong> </div>'
                  + '    <div>' + prog.start.substring(8, 10) + ":" + prog.start.substring(10, 12) + '</div>'
-                 + '    <div>' + prog.stop.substring(8, 10) + ":" + prog.stop.substring(10, 12) + '</div>'
                  + '    <div>' + prog.category + ' (' + prog.rating + ')</div>';     
 
          if (prog.start <= TvShowTool.getDateFormated( new Date()) && prog.stop >= TvShowTool.getDateFormated( new Date()))
-         html += '    <div class=" progress progress-striped active" style="height:7px; margin-bottom:5px;">'
+         html   += '    <div class=" progress progress-striped active" style="height:7px; margin-bottom:5px;">'
                  + '        <div class="progress-bar progress-bar-success" role="progressbar" style="width:' + this.calculeProgresseBar( prog)+ '">'
+                 + '        </div>'
+                 + '    </div>';
+
+        if (prog.stop <= TvShowTool.getDateFormated( new Date()) )
+         html   += '    <div class=" progress progress-striped active" style="height:7px; margin-bottom:5px;">'
+                 + '        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:100%">'
                  + '        </div>'
                  + '    </div>';
 

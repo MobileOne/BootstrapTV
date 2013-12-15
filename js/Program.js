@@ -1,4 +1,5 @@
 var Program = Class({
+    id        : null,
     start     : null,
     stop      : null,
     channel   : null,
@@ -10,7 +11,8 @@ var Program = Class({
     rating    : null,
     icon      : null,
 
-    initialize : function( start, stop, channel, title, sub_title, desc, category, video, rating, icon){
+    initialize : function( id, start, stop, channel, title, sub_title, desc, category, video, rating, icon){
+        this.id         = id;
         this.start      = start;
         this.stop       = stop;
         this.channel    = channel;

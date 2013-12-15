@@ -85,7 +85,7 @@ var DataLoader = Class({
             var video     = $(progs[i]).find("video").find("aspect").text();
             var rating    = $(progs[i]).find("rating").find("value").text();
             var icon      = $(progs[i]).find("icon").attr("src");
-            var prog = new Program( start, stop, channel, title, sub_title, desc, category, video, rating, icon);
+            var prog = new Program( i, start, stop, channel, title, sub_title, desc, category, video, rating, icon);
             self.programs[channel].push(prog);
         });
     }
