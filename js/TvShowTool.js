@@ -49,5 +49,14 @@ var TvShowTool = {
     	hoursMinutes.push(heure);
     	hoursMinutes.push(min);
     	return hoursMinutes;
+    },
+
+    getSliderValueByFormatedDate : function( formatedDate){
+        var date = this.getDateByTvShowDate( formatedDate);
+        var heure = date.getHours();
+        var min   = date.getMinutes();
+        var value = heure * 2;
+        if (min > 30) value++;
+        return value;
     }
 };

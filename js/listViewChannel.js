@@ -20,19 +20,20 @@ var listViewChannel = Class({
         date.setMinutes(10);
         date.setSeconds(00);
         context.selectedDate = TvShowTool.getDateFormated(date).toString();
-        this.buildListHTML( TvShowTool.getDateFormated(date));
+        this.displayAt( TvShowTool.getDateFormated(date));
     },
 
     displayNow : function(){
         $("#titreNavBar").text( TvShowTool.dateToText( new Date()));
         context.selectedDate = TvShowTool.getDateFormated( new Date()).toString();
-        this.buildListHTML( TvShowTool.getDateFormated( new Date()));
+        this.displayAt( TvShowTool.getDateFormated( new Date()));
     },
 
-    displayAt : function( formatedDate, inc){
+    displayAt : function( formatedDate, inc, slider){
         $("#titreNavBar").text( TvShowTool.dateToText( TvShowTool.getDateByTvShowDate( formatedDate)));
         context.selectedDate = formatedDate.toString();
         this.buildListHTML( formatedDate);
+        if (!slider) $("#slider").slider('setValue', TvShowTool.getSliderValueByFormatedDate( formatedDate));
     },
 
     test : function( val){ debugger; },
@@ -64,6 +65,7 @@ var listViewChannel = Class({
                 return this.buildOneProg( progs[i + ( next ? 1 : 0)]);
             }
         }
+        return "Programme non disponible"
     },
 
     calculeProgresseBar : function( prog){
