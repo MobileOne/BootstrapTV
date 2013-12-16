@@ -16,6 +16,8 @@ var navBar = Class({
             $('#dropdownPlus').append( drop);
         }
 
+        $('#dropdownPlus').append( '<li><a onclick="updateData()" href="#"><strong>Mettre à jour</strong></a></li>');
+
         $('#slider').slider({
             formater : function(val){
                 var hoursMinutes = TvShowTool.getSliderHoursMinutes(val, true);

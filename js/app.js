@@ -1,7 +1,22 @@
 
 
 function loadData(){
-	var tvProg = new TVProg();
+    var tvProg = new TVProg();
+}
+
+function updateData(){
+    jQuery.ajax({
+  type: 'GET', 
+  url: 'http://localhost/BootstrapTV/phpScript/updateTvProgram.php', 
+  success: function(data, textStatus, jqXHR) {
+       alert("Mise à jour réussie\nLes données du programme TV sont maintenant à jours\nL'application va maintenant se recharger");
+       location.reload();
+
+  },
+  error: function(jqXHR, textStatus, errorThrown) {
+    alert("Problème lors de la mise à jour des données sur le serveur");
+  }
+});
 }
 
 var TVProg = Class({
@@ -10,7 +25,8 @@ var TVProg = Class({
     programs    : null,
 
     initialize : function(){
-        this.dataLoader = new DataLoader( "data/tnt_lite.xml");
+        var timestamp = new Date().getTime();
+        this.dataLoader = new DataLoader( "data/tnt_lite.xml?timestamp="+timestamp);
         document.addEventListener("PROGRAMS_LOADED", this.initData.bind(this), false);
     },
 
