@@ -7,7 +7,7 @@ function loadData(){
 function updateData(){
     jQuery.ajax({
   type: 'GET', 
-  url: 'http://localhost/BootstrapTV/phpScript/updateTvProgram.php', 
+  url: 'http://geoffreynoel.fr/tvbootstrap/phpScript/updateTvProgram.php', 
   success: function(data, textStatus, jqXHR) {
        alert("Mise à jour réussie\nLes données du programme TV sont maintenant à jours\nL'application va maintenant se recharger");
        location.reload();

@@ -4,7 +4,14 @@ var listViewChannel = Class({
     progInCreneau : null,
 
     initialize : function () { 
+        this.loading();
         document.addEventListener("PROGRAMS_LOADED", this.initData.bind(this), false);
+    },
+
+    loading : function(){
+        var load = '<div class="loading"><img src="img/loading.png"/><br/>Chargement en cours</div>';
+
+        $("#content").append(load);
     },
 
     initData : function (event) {
