@@ -7,7 +7,7 @@ function loadData(){
 function updateData(){
     jQuery.ajax({
   type: 'GET', 
-  url: 'http://geoffreynoel.fr/tvbootstrap/phpScript/updateTvProgram.php', 
+  url: 'http://tv.geoffreynoel.fr/phpScript/updateTvProgram.php?v=1', 
   success: function(data, textStatus, jqXHR) {
        alert("Mise à jour réussie\nLes données du programme TV sont maintenant à jours\nL'application va maintenant se recharger");
        location.reload();
