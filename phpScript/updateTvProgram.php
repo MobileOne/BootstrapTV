@@ -1,5 +1,5 @@
 <?php
-     $url = "http://kevinpato.free.fr/xmltv/download/tnt_lite.zip";
+     $url = "http://xmltv.dyndns.org/download/tnt_lite.zip";
      $name = basename($url);
      if (file_put_contents("temp/$name", file_get_contents($url)))
      { 

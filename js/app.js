@@ -5,18 +5,22 @@ function loadData(){
 }
 
 function updateData(){
+    var timestamp = new Date().getTime(); 
+    var domain = window.location.hostname || "tv.geoffreynoel.fr";
+    if (domain == "localhost") url = "http://localhost/BootstrapTV/phpScript/updateTvProgram.php?v="+timestamp;
+    else url = 'http://'+domain+'/phpScript/updateTvProgram.php?v='+timestamp;
     jQuery.ajax({
-  type: 'GET', 
-  url: 'http://tv.geoffreynoel.fr/phpScript/updateTvProgram.php?v=1', 
-  success: function(data, textStatus, jqXHR) {
-       alert("Mise à jour réussie\nLes données du programme TV sont maintenant à jours\nL'application va maintenant se recharger");
-       location.reload();
+    type : 'GET', 
+    url  : url, 
+    success: function(data, textStatus, jqXHR) {
+        alert("Mise à jour réussie\nLes données du programme TV sont maintenant à jours\nL'application va maintenant se recharger");
+        location.reload();
 
-  },
-  error: function(jqXHR, textStatus, errorThrown) {
-    alert("Problème lors de la mise à jour des données sur le serveur");
-  }
-});
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        alert("Problème lors de la mise à jour des données sur le serveur");
+    }
+    });
 }
 
 var TVProg = Class({
