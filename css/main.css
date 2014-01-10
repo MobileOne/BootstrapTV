@@ -53,6 +53,21 @@ div{
     -webkit-animation : load 1s linear infinite;
 }
 
+.centreSmall{
+	text-align : center;
+}
+
+@media (min-width: 768px) {
+  	.centreSmall{
+	  text-align : left;
+	}
+}
+
+@media (min-width: 992px) {
+	.floatLeftBig{ float: left;}
+	.floatRightBig{ float: right;}
+}
+
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
