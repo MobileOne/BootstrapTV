@@ -9,7 +9,7 @@ var navBar = Class({
         var days   = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
         var months = ["Jan", "Fév", "Mars", "Avril", "Mai", "Juin", "Juil", "Aout", "Sept", "Oct", "Nov", "Déc"];
 
-        for (var i = 0; i < 7; i++){
+        for (var i = 0; i < 5; i++){
             date.setDate(date.getDate() + 1);
             if (date.getDay() == 1) $('#dropdownPlus').append( '<li class="dropdown-header">' + (i < 6 ? 'Semaine prochaine' : 'Semaine suivante') + '</li>');
             var drop = '<li><a onclick="listeViewChannel.displayAt('+ TvShowTool.getDateFormated( date) +', '+i+')" href="#">' + TvShowTool.dateToText( date) + '</a></li>';

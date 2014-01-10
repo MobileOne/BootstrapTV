@@ -49,11 +49,11 @@ var listViewChannel = Class({
         $("#content").empty();
         for (var i=0; i < this.channels.length-1; i++){ 
             var text = '<div class="row list-group-item" style="position: relative; padding : 0px">'
-                     + '    <div class="col-xs-3 col-sm-2 col-md-1">'
-                     + '        <img style="padding : 0px" class="col-xs-12" src="img/logos/' + this.channels[i].icon + '"/>'
+                     + '    <div class="col-xs-3 col-sm-2 col-md-1" style="text-align:center;">'
+                     + '        <img style="padding : 10px; box-sizing : border-box; width:100%;" src="img/logos/' + this.channels[i].icon + '"/>'
                      + '    </div>'
-                     + '    <div class="col-xs-9 col-sm-10">'
-                     + '        <div class="col-xs-12 col-sm-6">'
+                     + '    <div class="col-xs-9 col-sm-10" style="padding-left : 0px;">'
+                     + '        <div class="col-xs-12 col-sm-6" style="padding-left : 0px;">'
                      + this.buildHTMLProg( when, i+1, false) 
                      + '        </div>'
                      + '        <div class="hidden-xs col-sm-6">'
@@ -89,19 +89,19 @@ var listViewChannel = Class({
 
     buildOneProg : function( prog){
         var img = prog.icon ? '<div class="hidden-xs col-sm-2"> <img style="width:50px;" src="' + prog.icon + '"/> </div>' : '';
-        var html = '<div class="col-xs-12 col-sm-10" onclick="showManager.displayShowInfo('+prog.channel + ', '+prog.id+')">'
+        var html = '<div class="col-xs-12 col-sm-10" style="padding-left : 0px;" onclick="showManager.displayShowInfo('+prog.channel + ', '+prog.id+')">'
                  + '    <div> <strong>' + prog.title + '</strong> </div>'
                  + '    <div>' + prog.start.substring(8, 10) + ":" + prog.start.substring(10, 12) + '</div>'
                  + '    <div>' + prog.category + ' (' + prog.rating + ')</div>';     
 
          if (prog.start <= TvShowTool.getDateFormated( new Date()) && prog.stop >= TvShowTool.getDateFormated( new Date()))
-         html   += '    <div class=" progress progress-striped active" style="height:7px; margin-bottom:5px;">'
+         html   += '    <div class=" progress progress-striped active" style="height:7px; margin-bottom:5px; padding-left : 0px;">'
                  + '        <div class="progress-bar progress-bar-success" role="progressbar" style="width:' + this.calculeProgresseBar( prog)+ '">'
                  + '        </div>'
                  + '    </div>';
 
         if (prog.stop <= TvShowTool.getDateFormated( new Date()) )
-         html   += '    <div class=" progress progress-striped active" style="height:7px; margin-bottom:5px;">'
+         html   += '    <div class=" progress progress-striped active" style="height:7px; margin-bottom:5px; padding-left : 0px;">'
                  + '        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:100%">'
                  + '        </div>'
                  + '    </div>';

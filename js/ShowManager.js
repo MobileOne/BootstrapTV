@@ -14,21 +14,22 @@ var ShowManager = Class({
     displayShowInfo : function(  channelId, progId){
         var show = this.getShowById( channelId, progId);
         $("#content").empty();
+        $("#content").addClass("centreSmall")
         $("#content").append( this.addLineInfoShow('<img style="height:40px" src="img/logos/'+ this.getChennelById(show.channel).icon +'"/>',       '<span><h3>'+ show.title +'</h3></span>'));
-        if (show.icon) $("#content").append( this.addLineInfoShow("", '<img style="height:200px" src="'+ show.icon +'"/>'));
+        if (show.icon) $("#content").append( this.addLineInfoShow("", '<img style="height:200px;" src="'+ show.icon +'"/>'));
         $("#content").append( this.addLineInfoShow("Horaires",     TvShowTool.getTextFromXmlDate(show.start) + ' - ' +  TvShowTool.getTextFromXmlDate(show.stop)));
         $("#content").append( this.addLineInfoShow("Description", '['+show.category+' / '+show.rating+' / '+show.video+'] ' + show.desc));
     },
 
     addLineInfoShow : function(label, text){
-        var info =' <div class="form-group">'
+        var info =' <p><div class="form-group">'
                  +'     <label class="col-sm-2 control-label">'+label+'</label>'
                  +'     <div class="col-sm-10">'
                  +'         <p class="form-control-static">'
                  + text
                  +'         </p>'
                  +'     </div>'
-                 +' </div>';
+                 +' </div></p>';
         return info;
     },
 
