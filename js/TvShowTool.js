@@ -6,9 +6,9 @@ var TvShowTool = {
     dateToText : function( date){
         var days   = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
         var months = ["Jan", "Fév", "Mars", "Avril", "Mai", "Juin", "Juil", "Aout", "Sept", "Oct", "Nov", "Déc"];
-
         return days[date.getDay()] + ' ' + date.getDate() + ' ' + months[(date.getMonth())];
     },
+
     getDateByTvShowDate : function(xmlDate, hours, minutes){
     	xmlDate = xmlDate.toString();
     	var dateYear = xmlDate.substring(0, 4),
@@ -40,11 +40,8 @@ var TvShowTool = {
     	var hoursMinutes = [];
     	var heure = Math.floor(value / 2);
     	var min = 30;
-    	if (value %2 == 0) min = 0;
-
-    	if (byString && !min){
-    		min = "00";
-    	}
+    	if (value %2 == 0)    min = 0;
+    	if (byString && !min) min = "00";
 
     	hoursMinutes.push(heure);
     	hoursMinutes.push(min);
@@ -52,7 +49,7 @@ var TvShowTool = {
     },
 
     getSliderValueByFormatedDate : function( formatedDate){
-        var date = this.getDateByTvShowDate( formatedDate);
+        var date  = this.getDateByTvShowDate( formatedDate);
         var heure = date.getHours();
         var min   = date.getMinutes();
         var value = heure * 2;
@@ -65,10 +62,4 @@ var TvShowTool = {
         var min   = TvShowTool.getDateByTvShowDate( xmlDate).getMinutes() <= 9 ? "0"+TvShowTool.getDateByTvShowDate( xmlDate).getMinutes() : TvShowTool.getDateByTvShowDate( xmlDate).getMinutes();
         return heure + ":" + min;
     }
-
-
-
-
-
-    
 };

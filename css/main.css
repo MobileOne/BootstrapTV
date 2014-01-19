@@ -53,19 +53,17 @@ div{
     -webkit-animation : load 1s linear infinite;
 }
 
-.centreSmall{
-	text-align : center;
-}
+.centreSmall{ text-align : center; }
+.imgDescription{ max-width: 100%; max-height : 200px;}
 
 @media (min-width: 768px) {
-  	.centreSmall{
-	  text-align : left;
-	}
+  	.centreSmall{ text-align : left; }
 }
 
 @media (min-width: 992px) {
 	.floatLeftBig{ float: left;}
 	.floatRightBig{ float: right;}
+	.imgDescription{ height : 200px; width : auto;}
 }
 
 /* ==========================================================================

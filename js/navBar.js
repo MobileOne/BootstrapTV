@@ -33,11 +33,9 @@ var navBar = Class({
                 min = hoursMinutes[1],
                 d = context.selectedDate,
                 date =  TvShowTool.getDateByTvShowDate(d, heure, min);
-            
             listeViewChannel.displayAt(TvShowTool.getDateFormated( date), 1, true);
         });
     }
-
 });
 var navBar = new navBar();
 

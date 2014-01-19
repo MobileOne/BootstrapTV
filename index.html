@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>TV Program</title>
+        <title>Programme TV</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -27,18 +27,18 @@
       <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
           <div class="navbar-header" style="position:relative;">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <button type="button" id="btnCollapse" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a id="titreNavBar" class="navbar-brand centreSmall" onclick="listeViewChannel.displayNow();">TV Programmes</a>
-            <p class="navbar-text navbar-right hidden-xs visible-sm">
+            <a id="titreNavBar" class="navbar-brand centreSmall" onclick="listeViewChannel.displayNow();">Programme TV</a>
+            <p id="slidecontainer" class="navbar-text navbar-right">
               <input style="margin-top:25px;" type="text" id="slider" value="" data-slider-min="0" data-slider-max="47" data-slider-step="1" data-slider-value="5" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show" 
                size="20" style="min-width : 50px;">
             </p> 
           </div>
-          <div class="navbar-collapse collapse">
+          <div id="menuCollapse" class="navbar-collapse collapse" >
             <ul class="nav navbar-nav">
               <li><a  onclick="listeViewChannel.displayNow();" href="#now">Maintenant</a></li>
               <li onclick="listeViewChannel.displayTonight();" active="background-color:red"><a href="#tonight">Ce soir</a></li>
@@ -56,7 +56,6 @@
 
       <script>
         var t = new Date().getTime();
-
         var files = [ "js/vendor/bootstrap.min.js",
                       "js/vendor/jquery-dateFormat.min.js",
                       "js/bootstrap-slider.js",
@@ -72,7 +71,6 @@
                     ];
 
         for (var i = 0; i < files.length; i++)  $("head").append( '<script src="' + files[i] + '?v=' + t + '"><\/script>');
-
       </script>
     </body>
 </html>

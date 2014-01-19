@@ -1,5 +1,3 @@
-
-
 function loadData(){
     var tvProg = new TVProg();
 }

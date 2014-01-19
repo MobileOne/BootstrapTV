@@ -13,7 +13,6 @@
                unlink ( "temp/tnt_lite.zip" );
                return true;
           }
-
      }
      else {
           echo "<br/>Download Error ";
