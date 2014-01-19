@@ -4,9 +4,7 @@ function loadData(){
 
 function updateData(){
     var timestamp = new Date().getTime(); 
-    var domain = window.location.hostname || "tv.geoffreynoel.fr";
-    if (domain == "localhost") url = "http://localhost/BootstrapTV/phpScript/updateTvProgram.php?v="+timestamp;
-    else url = 'http://'+domain+'/phpScript/updateTvProgram.php?v='+timestamp;
+    url = "phpScript/updateTvProgram.php?v="+timestamp;
     jQuery.ajax({
     type : 'GET', 
     url  : url, 
@@ -69,7 +67,7 @@ var DataLoader = Class({
                 document.dispatchEvent(PROGRAMS_LOADED);
             },
             error : function(){
-                alert("Erreur de chargement du XML")
+                if(confirm('Le programme est introuvable\nChoisissez "OK" pour mettre à jour le programme tv sur le serveur')) updateData();
             }
         });
     },
